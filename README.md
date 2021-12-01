@@ -23,10 +23,17 @@ It is clear that executing a query for each demand to calculate the surge rate, 
 1. Cache the number of demands with a short time life span, for example we query the database and cache into redis for one minute, and surge service calculates the rating from this value, after one minute it will be refreshed hence old demands will be removed and new ones will be added, one problems is that this is not so much realtime, if we have a surge of demands in under one minute, we will not be able to detect it.  
 2. More realtime aproach, we can cach the number of demands in redis on service startup, and each new demand will increase the cach value by +1, and after one hour, we will decrease the cach value by -1, hence the value is realtime and surge rating is calculated very precisely.   
 
-Aproach one doesn't requrie much resources, but aproach two uses a time queue to decrease the cached values, for example, if we have one milion demands in a time span of one hour(worst case scenario, not going to happen very soon), there will be almost one milion `decrease by one after one hour` messages in the queue, the worst possible thing can happen is that you will need about `one GIG` extra RAM.  
+Aproach one doesn't requrie much resources, but aproach two uses a time queue to decrease the cached values, for example, if we have one milion demands in a time span of one hour(worst case scenario, not going to happen very soon), there will be almost one milion `decrease by one after one hour` messages in the queue, the worst possible thing can happen is that you will need about `one or two` extra GIGs of RAM.  
 A small note about the aproach two is that, because there maybe old messages on the queue, the worker that consumes the decrease messages must does the message only if it is created after the timestamp of the cached value, otherwise it will be ignored, to assure the inconsistency.  
+Also we must check if one unique user is trying to create many demands in a short time, if so, we will not change the cached demand count.  
 
 ![surge service basic](./docs/images/surge-basic.png)
+
+And we need a service to resolve the geographical location of the client into the real life district name or district id, so we are going to open street map, overpass api to obtain these information.  
+Also we need a user management service that will handle authentication of our clients.  
+
+![overal design](./docs/images/design.png)
+
 
 ## Resources
 
