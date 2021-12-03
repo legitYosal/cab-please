@@ -46,3 +46,4 @@ Here are some usefull links:
 [Adding swagger support to gin.](https://github.com/swaggo/swag)
 [Using viper for environment files.](https://github.com/spf13/viper)
 [Hash user passwords in database.](https://pkg.go.dev/golang.org/x/crypto/bcrypt)
+[JWT tokens in golang.](https://github.com/golang-jwt/jwt)

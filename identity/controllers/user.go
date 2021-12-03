@@ -46,7 +46,8 @@ func ObtainJWT(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Wrong password!"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"access": auth.CreateJWT(user.ID, user.Username)})
+	token := auth.CreateJWT(user.ID, user.Username)
+	c.JSON(http.StatusOK, gin.H{"access": token})
 }
 
 // SignupUser godoc
