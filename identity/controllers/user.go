@@ -6,6 +6,7 @@ import (
 
 	"surge/identity/m/auth"
 	"surge/identity/m/models"
+	"surge/identity/m/permission"
 
 	"github.com/gin-gonic/gin"
 )
@@ -81,8 +82,18 @@ func SignupUser(c *gin.Context) {
 // @Accept   json
 // @Produce  json
 // @tags 	  User
+// @Success 200 {object} object
 // @Security ApiKeyAuth
 // @Router   /api/users/profile [get]
 func GetProfile(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{})
+	user, isAuthorized := permission.IsAuthenticated(c)
+	fmt.Println(isAuthorized)
+	if isAuthorized == false {
+		c.JSON(http.StatusForbidden, gin.H{"error": "You are not authorized to access!"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"id":       (*user).ID,
+		"username": (*user).Username,
+	})
 }

@@ -72,7 +72,15 @@ var doc = `{
                 "tags": [
                     "User"
                 ],
-                "summary": "get user profile"
+                "summary": "get user profile",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
             }
         },
         "/api/users/signup": {

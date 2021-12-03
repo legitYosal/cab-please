@@ -1,0 +1,17 @@
+package permission
+
+import (
+	"surge/identity/m/middleware"
+
+	"github.com/gin-gonic/gin"
+)
+
+func IsAuthenticated(c *gin.Context) (*middleware.TokenUser, bool) {
+	user, exist := c.Get("user")
+	if exist == true {
+		user := user.(middleware.TokenUser)
+		return &user, true
+	} else {
+		return nil, false
+	}
+}

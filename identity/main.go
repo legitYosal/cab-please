@@ -2,6 +2,7 @@ package main
 
 import (
 	"surge/identity/m/controllers"
+	"surge/identity/m/middleware"
 	"surge/identity/m/models"
 
 	"github.com/gin-gonic/gin"
@@ -24,6 +25,7 @@ func main() {
 	host := utils.GetEnv("HOST")
 
 	r := gin.Default()
+	r.Use(middleware.AuthorizationMiddleware)
 
 	models.ConnectDatabase()
 
