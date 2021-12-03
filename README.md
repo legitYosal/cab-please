@@ -47,3 +47,4 @@ Here are some usefull links:
 [Using viper for environment files.](https://github.com/spf13/viper)
 [Hash user passwords in database.](https://pkg.go.dev/golang.org/x/crypto/bcrypt)
 [JWT tokens in golang.](https://github.com/golang-jwt/jwt)
+[Wrting a middleware for gin.](https://sosedoff.com/2014/12/21/gin-middleware.html)
