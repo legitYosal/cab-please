@@ -10,6 +10,7 @@ import (
 )
 
 var jwtExpiryInSeconds int = 600
+var jwtSecretKey string
 
 func CreateJWT(userID uint, userName string) string {
 	expiryInUnix := time.Now().UTC().Add(time.Second * time.Duration(jwtExpiryInSeconds)).Unix()
@@ -18,7 +19,12 @@ func CreateJWT(userID uint, userName string) string {
 		"user_name": userName,
 		"exp":       expiryInUnix,
 	})
-	tokenString, err := token.SignedString([]byte(utils.GetEnv("SECRET_KEY")))
+
+	if jwtSecretKey == "" {
+		jwtSecretKey = utils.GetEnv("SECRET_KEY")
+	}
+
+	tokenString, err := token.SignedString([]byte(jwtSecretKey))
 	if err != nil {
 		panic(err)
 	}
@@ -26,11 +32,15 @@ func CreateJWT(userID uint, userName string) string {
 }
 
 func DecodeJWT(tokenString string) (uint64, string, bool) {
+	if jwtSecretKey == "" {
+		jwtSecretKey = utils.GetEnv("SECRET_KEY")
+	}
+
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}
-		return []byte(utils.GetEnv("SECRET_KEY")), nil
+		return []byte(jwtSecretKey), nil
 	})
 
 	if err != nil {

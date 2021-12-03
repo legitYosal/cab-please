@@ -37,14 +37,16 @@ Also we need a user management service that will handle authentication of our cl
 ## Resources
 
 Here are some usefull links:  
-[Understand OSM data models.](https://wiki.openstreetmap.org/wiki/Elements)  
-[Tehran OSM relation.](https://www.openstreetmap.org/relation/6663864#map=12/35.7398/51.4933)
-[Go bee framework.](https://beego.vip/docs/intro/)
-[Go gin framework.](https://github.com/gin-gonic/gin)
-[Gorm ORM.](https://github.com/go-gorm/gorm)
-[Writing a simple API with gin and gorm.](https://blog.logrocket.com/how-to-build-a-rest-api-with-golang-using-gin-and-gorm/)
-[Adding swagger support to gin.](https://github.com/swaggo/swag)
-[Using viper for environment files.](https://github.com/spf13/viper)
-[Hash user passwords in database.](https://pkg.go.dev/golang.org/x/crypto/bcrypt)
-[JWT tokens in golang.](https://github.com/golang-jwt/jwt)
-[Wrting a middleware for gin.](https://sosedoff.com/2014/12/21/gin-middleware.html)
+- [Understand OSM data models.](https://wiki.openstreetmap.org/wiki/Elements)  
+- [Tehran OSM relation.](https://www.openstreetmap.org/relation/6663864#map=12/35.7398/51.4933)  
+- [Go bee framework.](https://beego.vip/docs/intro/)  
+- [Go gin framework.](https://github.com/gin-gonic/gin)  
+- [Gorm ORM.](https://github.com/go-gorm/gorm)  
+- [Writing a simple API with gin and gorm.](https://blog.logrocket.com/how-to-build-a-rest-api-with-golang-using-gin-and-gorm/)  
+- [Adding swagger support to gin.](https://github.com/swaggo/swag)  
+- [Using viper for environment files.](https://github.com/spf13/viper)  
+- [Hash user passwords in database.](https://pkg.go.dev/golang.org/x/crypto/bcrypt)  
+- [JWT tokens in golang.](https://github.com/golang-jwt/jwt)  
+- [Wrting a middleware for gin.](https://sosedoff.com/2014/12/21/gin-middleware.html)  
+- [Wrting tests in golang.](https://www.digitalocean.com/community/tutorials/how-to-write-unit-tests-in-go-using-go-test-and-the-testing-package)  
+

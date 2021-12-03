@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	"surge/identity/m/auth"
@@ -37,9 +36,6 @@ func ObtainJWT(c *gin.Context) {
 	}
 	var user models.User
 	if err := models.DB.Where("username = ?", input.Username).First(&user).Error; err != nil {
-		fmt.Println(err)
-		fmt.Println(input.Username)
-		fmt.Println(user.Password)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
 		return
 	}
@@ -87,7 +83,6 @@ func SignupUser(c *gin.Context) {
 // @Router   /api/users/profile [get]
 func GetProfile(c *gin.Context) {
 	user, isAuthorized := permission.IsAuthenticated(c)
-	fmt.Println(isAuthorized)
 	if isAuthorized == false {
 		c.JSON(http.StatusForbidden, gin.H{"error": "You are not authorized to access!"})
 		return
