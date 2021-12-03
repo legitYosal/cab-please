@@ -1,4 +1,4 @@
-module surge/identity/m
+module github.com/usefss/cab-please/identity
 
 go 1.17
 

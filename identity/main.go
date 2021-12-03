@@ -1,18 +1,19 @@
 package main
 
 import (
-	"surge/identity/m/controllers"
-	"surge/identity/m/middleware"
-	"surge/identity/m/models"
+	"github.com/usefss/cab-please/identity/middleware"
+	"github.com/usefss/cab-please/identity/models"
+
+	"github.com/usefss/cab-please/identity/controllers"
 
 	"github.com/gin-gonic/gin"
 
-	utils "surge/identity/m/utils"
+	utils "github.com/usefss/cab-please/identity/utils"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
-	_ "surge/identity/m/docs"
+	_ "github.com/usefss/cab-please/identity/docs"
 )
 
 // @title           Swagger Identity API

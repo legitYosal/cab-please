@@ -2,7 +2,8 @@ package middleware
 
 import (
 	"net/http"
-	"surge/identity/m/auth"
+
+	"github.com/usefss/cab-please/identity/auth"
 
 	"github.com/gin-gonic/gin"
 )

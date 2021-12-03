@@ -3,9 +3,9 @@ package controllers
 import (
 	"net/http"
 
-	"surge/identity/m/auth"
-	"surge/identity/m/models"
-	"surge/identity/m/permission"
+	"github.com/usefss/cab-please/identity/auth"
+	"github.com/usefss/cab-please/identity/models"
+	"github.com/usefss/cab-please/identity/permission"
 
 	"github.com/gin-gonic/gin"
 )

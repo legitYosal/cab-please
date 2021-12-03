@@ -3,8 +3,9 @@ package auth
 import (
 	"fmt"
 	"strconv"
-	"surge/identity/m/utils"
 	"time"
+
+	"github.com/usefss/cab-please/identity/utils"
 
 	"github.com/golang-jwt/jwt"
 )

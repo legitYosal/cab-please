@@ -1,7 +1,7 @@
 package permission
 
 import (
-	"surge/identity/m/middleware"
+	"github.com/usefss/cab-please/identity/middleware"
 
 	"github.com/gin-gonic/gin"
 )
