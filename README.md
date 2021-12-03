@@ -44,3 +44,5 @@ Here are some usefull links:
 [Gorm ORM.](https://github.com/go-gorm/gorm)
 [Writing a simple API with gin and gorm.](https://blog.logrocket.com/how-to-build-a-rest-api-with-golang-using-gin-and-gorm/)
 [Adding swagger support to gin.](https://github.com/swaggo/swag)
+[Using viper for environment files.](https://github.com/spf13/viper)
+[Hash user passwords in database.](https://pkg.go.dev/golang.org/x/crypto/bcrypt)
