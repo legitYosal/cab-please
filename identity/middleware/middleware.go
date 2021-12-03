@@ -26,6 +26,7 @@ func AuthorizationMiddleware(c *gin.Context) {
 			c.Next()
 		} else {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "JWT is not valid!"})
+			c.Abort()
 			return
 		}
 	}

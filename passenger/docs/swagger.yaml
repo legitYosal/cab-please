@@ -1,0 +1,11 @@
+info:
+  contact: {}
+  description: Passenger swagger docs.
+  title: Swagger Passenger API
+paths: {}
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
