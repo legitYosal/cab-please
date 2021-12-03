@@ -1,0 +1,23 @@
+info:
+  contact: {}
+  description: Identity swagger docs.
+  title: Swagger Identity API
+paths:
+  /api/users/login:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+  /api/users/signup:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
