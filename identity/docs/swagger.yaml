@@ -1,3 +1,24 @@
+definitions:
+  controllers.UserLogin:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  controllers.UserSignupInput:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
 info:
   contact: {}
   description: Identity swagger docs.
@@ -7,14 +28,55 @@ paths:
     post:
       consumes:
       - application/json
+      parameters:
+      - description: User Data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.UserLogin'
       produces:
       - application/json
-  /api/users/signup:
-    post:
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      summary: Obtain JWT
+      tags:
+      - User
+  /api/users/profile:
+    get:
       consumes:
       - application/json
       produces:
       - application/json
+      security:
+      - ApiKeyAuth: []
+      summary: get user profile
+      tags:
+      - User
+  /api/users/signup:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User Data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.UserSignupInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      summary: Signup user
+      tags:
+      - User
 securityDefinitions:
   ApiKeyAuth:
     in: header
