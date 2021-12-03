@@ -5,7 +5,59 @@
         "title": "Swagger Passenger API",
         "contact": {}
     },
-    "paths": {},
+    "paths": {
+        "/api/journey/": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Journey"
+                ],
+                "summary": "request a ride",
+                "parameters": [
+                    {
+                        "description": "Request Journey",
+                        "name": "journey",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.JourneyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controllers.JourneyRequest": {
+            "type": "object",
+            "properties": {
+                "start_latitude": {
+                    "type": "number"
+                },
+                "start_longitude": {
+                    "type": "number"
+                }
+            }
+        }
+    },
     "securityDefinitions": {
         "ApiKeyAuth": {
             "type": "apiKey",

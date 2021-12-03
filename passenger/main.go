@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/usefss/cab-please/identity/middleware"
-	utils "github.com/usefss/cab-please/identity/utils"
-
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/usefss/cab-please/identity/middleware"
+	utils "github.com/usefss/cab-please/identity/utils"
+	"github.com/usefss/cab-please/passenger/controllers"
 
 	_ "github.com/usefss/cab-please/passenger/docs"
 )
@@ -23,6 +23,7 @@ func main() {
 	r := gin.Default()
 	r.Use(middleware.AuthorizationMiddleware)
 
+	r.POST("/api/journey/", controllers.RequestJourney)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.Run(host + ":" + port)

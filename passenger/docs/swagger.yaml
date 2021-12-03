@@ -1,8 +1,39 @@
+definitions:
+  controllers.JourneyRequest:
+    properties:
+      start_latitude:
+        type: number
+      start_longitude:
+        type: number
+    type: object
 info:
   contact: {}
   description: Passenger swagger docs.
   title: Swagger Passenger API
-paths: {}
+paths:
+  /api/journey/:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request Journey
+        in: body
+        name: journey
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.JourneyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: request a ride
+      tags:
+      - Journey
 securityDefinitions:
   ApiKeyAuth:
     in: header
