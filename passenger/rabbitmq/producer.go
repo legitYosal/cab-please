@@ -13,7 +13,7 @@ func failOnError(err error, msg string) {
 	}
 }
 
-func PublishDecreaseDemand() {
+func PublishDecreaseDemand(demandKey string) {
 	conn, err := amqp.Dial("amqp://guest:guest@" + utils.GetEnv("RABBITMQ_ADDR") + "/")
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
@@ -39,7 +39,7 @@ func PublishDecreaseDemand() {
 		false,  // immediate
 		amqp.Publishing{
 			ContentType: "text/plain",
-			Body:        []byte("decrease"),
+			Body:        []byte(demandKey),
 		})
 	failOnError(err, "Failed to publish a message")
 }

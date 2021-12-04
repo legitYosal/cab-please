@@ -16,11 +16,13 @@ type JourneyRequest struct {
 	StartLongitude float64 `json:"start_longitude" binding:"required"`
 }
 
+var prefixKey string = "surge-demands:"
+
 func adjustJourneyDemands(districtKey string) {
 	// Note I know I should prevent one user to send many demands but it actually \
 	// must be handled in ratelimit
-	redis.IncrementOrSetDemand(districtKey)
-	rabbitmq.PublishDecreaseDemand()
+	redis.IncrementOrSetDemand(prefixKey + districtKey)
+	rabbitmq.PublishDecreaseDemand(prefixKey + districtKey)
 }
 
 func getSurgeRating(districtKey string) float64 {
