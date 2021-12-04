@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/usefss/cab-please/identity/permission"
+	"github.com/usefss/cab-please/passenger/protob"
 
 	"github.com/gin-gonic/gin"
 )
@@ -49,12 +50,9 @@ func RequestJourney(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	/*
-		do following things
-		 - if user is has no recent demands, +1 the demand district count and -1 message to queue
-		 - get surge rating of the area
-	*/
-	getClientDistrict()
+	district, city, country := protob.ResolveCoordinates(35.692437, 51.320802)
+	districtKey := country + ":" + city + ":" + district
+	fmt.Println(districtKey)
 	go adjustJourneyDemands()
 	surgeRating := getSurgeRating()
 	fmt.Println((*user).ID)
