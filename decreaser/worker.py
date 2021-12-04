@@ -11,9 +11,11 @@ def callback(ch, method, properties, body):
 
 if __name__ == '__main__':
     try:
-        channel.basic_consume(queue=config.DecreaseDemandQueueName,
-                        auto_ack=True,
-                        on_message_callback=callback)
+        channel.basic_consume(
+            queue=config.DECREASE_QUEUE_NAME,
+            auto_ack=True,
+            on_message_callback=callback
+        )
         print(' [*] Waiting for messages. To exit press CTRL+C')
         channel.start_consuming()
     except KeyboardInterrupt:

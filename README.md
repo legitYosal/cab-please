@@ -53,4 +53,6 @@ Here are some usefull links:
 - [GRPC with python.](https://realpython.com/python-microservices-grpc/)    
 - [GRPC with golang.](https://tutorialedge.net/golang/go-grpc-beginners-tutorial/)  
 - [Redis client with golang.](https://github.com/go-redis/redis)  
-- [RabbitMQ producer consumer.](https://www.rabbitmq.com/tutorials/tutorial-one-go.html)
+- [RabbitMQ producer consumer.](https://www.rabbitmq.com/tutorials/tutorial-one-go.html)  
+- [RabbitMQ delayed exchange.](https://blog.rabbitmq.com/posts/2015/04/scheduling-messages-with-rabbitmq)  
+
