@@ -1,12 +1,12 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/usefss/cab-please/identity/permission"
-	"github.com/usefss/cab-please/passenger/protob"
+	"github.com/usefss/cab-please/passenger/mapgrpc"
+	"github.com/usefss/cab-please/passenger/rabbitmq"
+	"github.com/usefss/cab-please/passenger/redis"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,16 +16,14 @@ type JourneyRequest struct {
 	StartLongitude float64 `json:"start_longitude" binding:"required"`
 }
 
-func adjustJourneyDemands() {
-	time.Sleep(time.Second * 1)
-	fmt.Println("test")
+func adjustJourneyDemands(districtKey string) {
+	// Note I know I should prevent one user to send many demands but it actually \
+	// must be handled in ratelimit
+	redis.IncrementOrSetDemand(districtKey)
+	rabbitmq.PublishDecreaseDemand()
 }
 
-func getClientDistrict() string {
-	return "test"
-}
-
-func getSurgeRating() float64 {
+func getSurgeRating(districtKey string) float64 {
 	return 0.5
 }
 
@@ -39,7 +37,7 @@ func getSurgeRating() float64 {
 // @Security ApiKeyAuth
 // @Router /api/journey/ [post]
 func RequestJourney(c *gin.Context) {
-	user, isAuthorized := permission.IsAuthenticated(c)
+	_, isAuthorized := permission.IsAuthenticated(c)
 	if isAuthorized == false {
 		c.JSON(http.StatusForbidden, gin.H{"error": "You are not authorized to access!"})
 		return
@@ -50,12 +48,10 @@ func RequestJourney(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	district, city, country := protob.ResolveCoordinates(35.692437, 51.320802)
+	district, city, country := mapgrpc.ResolveCoordinates(input.StartLatitude, input.StartLongitude)
 	districtKey := country + ":" + city + ":" + district
-	fmt.Println(districtKey)
-	go adjustJourneyDemands()
-	surgeRating := getSurgeRating()
-	fmt.Println((*user).ID)
+	go adjustJourneyDemands(districtKey)
+	surgeRating := getSurgeRating(districtKey)
 	c.JSON(http.StatusOK, gin.H{
 		"surge_rating": surgeRating,
 	})

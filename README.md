@@ -52,3 +52,5 @@ Here are some usefull links:
 - [Use nominatim to resolve the location of the client.](https://nominatim.org/release-docs/develop/api/Reverse/)  
 - [GRPC with python.](https://realpython.com/python-microservices-grpc/)    
 - [GRPC with golang.](https://tutorialedge.net/golang/go-grpc-beginners-tutorial/)  
+- [Redis client with golang.](https://github.com/go-redis/redis)  
+- [RabbitMQ producer consumer.](https://www.rabbitmq.com/tutorials/tutorial-one-go.html)
