@@ -1,0 +1,1 @@
+python -m grpc_tools.protoc --proto_path=. ./map.proto --python_out=./stubs --grpc_python_out=./stubs

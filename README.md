@@ -49,4 +49,6 @@ Here are some usefull links:
 - [JWT tokens in golang.](https://github.com/golang-jwt/jwt)  
 - [Wrting a middleware for gin.](https://sosedoff.com/2014/12/21/gin-middleware.html)  
 - [Wrting tests in golang.](https://www.digitalocean.com/community/tutorials/how-to-write-unit-tests-in-go-using-go-test-and-the-testing-package)  
+- [Use nominatim to resolve the location of the client.](https://nominatim.org/release-docs/develop/api/Reverse/)  
+- [GRPC with python.](https://realpython.com/python-microservices-grpc/)  
 

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package surge.map.grpc;
+
+service Map {
+    rpc GetServerResponse(CoordinateRequest) returns (DistrictResponse) {}
+}
+
+message CoordinateRequest{
+    string latitude = 1;
+    string longitude = 2;
+}
+
+message DistrictResponse{
+    string district = 1;
+    string city = 2;
+    string country = 3;
+}
