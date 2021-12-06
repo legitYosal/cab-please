@@ -23,10 +23,10 @@ class BaseThresholdAPI(GenericAPIView):
             we just get all the thresholds and cache them
             into the redis
         """
-        data = [[
-            threshold.request_threshold,
-            threshold.price_coefficient,
-        ] for threshold in Threshold.objects.order_by('request_threshold')]
+        data = [{
+            'request_threshold': threshold.request_threshold,
+            'price_coefficient': threshold.price_coefficient,
+        } for threshold in Threshold.objects.order_by('-request_threshold')]
         set_surge_config(data)
 
 class UpdateDeleteThresholdsAPI(BaseThresholdAPI, DestroyModelMixin,
