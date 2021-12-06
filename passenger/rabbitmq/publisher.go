@@ -16,17 +16,17 @@ func failOnError(err error, msg string) {
 var demandCacheWindowSize int = 60 * 1000
 
 func PublishDecreaseDemand(demandKey string) {
-	conn, err := amqp.Dial("amqp://guest:guest@" + utils.GetEnv("RABBITMQ_ADDR") + "/")
-	failOnError(err, "Failed to connect to RabbitMQ")
+	conn, errDial := amqp.Dial("amqp://guest:guest@" + utils.GetEnv("RABBITMQ_ADDR") + "/")
+	failOnError(errDial, "Failed to connect to RabbitMQ")
 	defer conn.Close()
 
-	ch, err := conn.Channel()
-	failOnError(err, "Failed to open a channel")
+	ch, errChann := conn.Channel()
+	failOnError(errChann, "Failed to open a channel")
 	defer ch.Close()
 
 	args := make(amqp.Table)
 	args["x-delayed-type"] = "direct"
-	err = ch.ExchangeDeclare(
+	errEx := ch.ExchangeDeclare(
 		utils.GetEnv("RABBITMQ_DELAYED_EXCHANGE_NAME"), // name
 		"x-delayed-message",                            // type
 		true,                                           // durable
@@ -35,8 +35,9 @@ func PublishDecreaseDemand(demandKey string) {
 		false,                                          // no-wait
 		args,                                           // arguments
 	)
+	failOnError(errEx, "Failed to declare an exchange")
 
-	err = ch.Publish(
+	errPub := ch.Publish(
 		utils.GetEnv("RABBITMQ_DELAYED_EXCHANGE_NAME"), // exchange
 		utils.GetEnv("RABBITMQ_DECREASE_QUEUE_NAME"),   // routing key
 		false, // mandatory
@@ -48,5 +49,5 @@ func PublishDecreaseDemand(demandKey string) {
 				"x-delay": demandCacheWindowSize,
 			},
 		})
-	failOnError(err, "Failed to publish a message")
+	failOnError(errPub, "Failed to publish a message")
 }

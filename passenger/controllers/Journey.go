@@ -41,7 +41,7 @@ func getSurgeRating(districtKey string) float32 {
 // @Router /api/journey/ [post]
 func RequestJourney(c *gin.Context) {
 	_, isAuthorized := permission.IsAuthenticated(c)
-	if isAuthorized == false {
+	if !isAuthorized {
 		c.JSON(http.StatusForbidden, gin.H{"error": "You are not authorized to access!"})
 		return
 	}

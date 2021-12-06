@@ -26,5 +26,8 @@ func main() {
 	r.POST("/api/journey/", controllers.RequestJourney)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	r.Run(host + ":" + port)
+	err := r.Run(host + ":" + port)
+	if err != nil {
+		panic(err)
+	}
 }
