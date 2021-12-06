@@ -22,14 +22,14 @@ type GRPCServer struct {
 
 func getConfigs() *[]Threshold {
 	ctx := bgContext.Background()
-	value, err := redisClient.GetRedisClient().Get(ctx, SURGE_CONFIG_CACHE_KEY).Result()
+	rawConfig, err := redisClient.GetRedisClient().Get(ctx, SURGE_CONFIG_CACHE_KEY).Result()
 	if err == redis.Nil {
-		// fmt.Println(value)
+		panic("No surge config is in cache")
 	} else if err != nil {
 		panic(err)
 	}
 	var configs []Threshold
-	errJson := json.Unmarshal([]byte(value), &configs)
+	errJson := json.Unmarshal([]byte(rawConfig), &configs)
 	if errJson != nil {
 		panic(errJson)
 	}

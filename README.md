@@ -39,7 +39,6 @@ Also we need a user management service that will handle authentication of our cl
 Here are some usefull links:  
 - [Understand OSM data models.](https://wiki.openstreetmap.org/wiki/Elements)  
 - [Tehran OSM relation.](https://www.openstreetmap.org/relation/6663864#map=12/35.7398/51.4933)  
-- [Go bee framework.](https://beego.vip/docs/intro/)  
 - [Go gin framework.](https://github.com/gin-gonic/gin)  
 - [Gorm ORM.](https://github.com/go-gorm/gorm)  
 - [Writing a simple API with gin and gorm.](https://blog.logrocket.com/how-to-build-a-rest-api-with-golang-using-gin-and-gorm/)  
@@ -50,9 +49,7 @@ Here are some usefull links:
 - [Wrting a middleware for gin.](https://sosedoff.com/2014/12/21/gin-middleware.html)  
 - [Wrting tests in golang.](https://www.digitalocean.com/community/tutorials/how-to-write-unit-tests-in-go-using-go-test-and-the-testing-package)  
 - [Use nominatim to resolve the location of the client.](https://nominatim.org/release-docs/develop/api/Reverse/)  
-- [GRPC with python.](https://realpython.com/python-microservices-grpc/)    
-- [GRPC with golang.](https://tutorialedge.net/golang/go-grpc-beginners-tutorial/)  
-- [Redis client with golang.](https://github.com/go-redis/redis)  
-- [RabbitMQ producer consumer.](https://www.rabbitmq.com/tutorials/tutorial-one-go.html)  
+- [How to use GRPC?](https://tutorialedge.net/golang/go-grpc-beginners-tutorial/)  
+- [Working with Redis.](https://github.com/go-redis/redis)  
 - [RabbitMQ delayed exchange.](https://blog.rabbitmq.com/posts/2015/04/scheduling-messages-with-rabbitmq)  
 
