@@ -11,7 +11,7 @@ I have dockerized the project and you can run it with the following commands(you
 $ git clone git@github.com:usefss/cab-please.git
 $ cd cab-please
 $ docker-compose build
-$ docker-compose up -d
+$ docker-compose up -d --scale decreaser=4
 ```
 
 Now to interact with the identity service and create a new user and obtain tokens you can use the swagger ui exposed at [this url](http://localhost:8080/swagger/index.html).  
@@ -73,4 +73,4 @@ Here are some usefull links:
 - [How to use GRPC?](https://tutorialedge.net/golang/go-grpc-beginners-tutorial/)  
 - [Working with Redis.](https://github.com/go-redis/redis)  
 - [RabbitMQ delayed exchange.](https://blog.rabbitmq.com/posts/2015/04/scheduling-messages-with-rabbitmq)  
-
+- [Golang code linting.](https://github.com/golangci/golangci-lint)  
