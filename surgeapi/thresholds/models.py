@@ -11,7 +11,7 @@ class DefaultLoaded(models.Model):
     loaded = models.BooleanField(default=True)
 
 class Threshold(models.Model):
-    request_threshold = models.IntegerField()
+    request_threshold = models.IntegerField(unique=True)
     price_coefficient = models.FloatField()
 
     def __str__(self, ):

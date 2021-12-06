@@ -146,3 +146,8 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timezone.timedelta(seconds=600),
     'REFRESH_TOKEN_LIFETIME': timezone.timedelta(days=0),
 }
+
+REDIS_HOST = os.getenv('REDIS_HOST')
+REDIS_PORT = 6379
+REDIS_DB = 0
+SURGE_CONFIG_CACHE_KEY = 'surge-service-config'

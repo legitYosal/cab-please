@@ -7,6 +7,7 @@ from rest_framework.mixins import (
 from .permissions import IsAdmin
 from .models import Threshold
 from .serializers import ThresholdSerializer
+from .utils.redis import set_surge_config
 
 class BaseThresholdAPI(GenericAPIView):
 
@@ -16,8 +17,17 @@ class BaseThresholdAPI(GenericAPIView):
 
     permission_classes = [IsAdmin, ]
 
-    def update_on_redis(self, ):
-        pass
+    @classmethod
+    def update_on_redis(cls, ):
+        """
+            we just get all the thresholds and cache them
+            into the redis
+        """
+        data = [[
+            threshold.request_threshold,
+            threshold.price_coefficient,
+        ] for threshold in Threshold.objects.order_by('request_threshold')]
+        set_surge_config(data)
 
 class UpdateDeleteThresholdsAPI(BaseThresholdAPI, DestroyModelMixin,
                     UpdateModelMixin):

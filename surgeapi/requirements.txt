@@ -3,3 +3,4 @@ djangorestframework==3.12.4
 djangorestframework-simplejwt==4.6.0
 python-dotenv==0.19.1
 drf-spectacular==0.20.2
+redis==4.0.2
