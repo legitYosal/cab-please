@@ -136,10 +136,14 @@ var doc = `{
         "controllers.UserSignupInput": {
             "type": "object",
             "required": [
+                "is_admin",
                 "password",
                 "username"
             ],
             "properties": {
+                "is_admin": {
+                    "type": "boolean"
+                },
                 "password": {
                     "type": "string"
                 },

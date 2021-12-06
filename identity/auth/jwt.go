@@ -5,20 +5,23 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/usefss/cab-please/identity/utils"
-
 	"github.com/golang-jwt/jwt"
+	"github.com/google/uuid"
+	"github.com/usefss/cab-please/identity/utils"
 )
 
 var jwtExpiryInSeconds int = 600
 var jwtSecretKey string
 
-func CreateJWT(userID uint, userName string) string {
+func CreateJWT(userID uint, userName string, isAdmin bool) string {
 	expiryInUnix := time.Now().UTC().Add(time.Second * time.Duration(jwtExpiryInSeconds)).Unix()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"user_id":   strconv.FormatUint(uint64(userID), 10),
-		"user_name": userName,
-		"exp":       expiryInUnix,
+		"jti":        uuid.New().String(),
+		"user_id":    strconv.FormatUint(uint64(userID), 10),
+		"is_admin":   isAdmin,
+		"user_name":  userName,
+		"exp":        expiryInUnix,
+		"token_type": "access",
 	})
 
 	if jwtSecretKey == "" {

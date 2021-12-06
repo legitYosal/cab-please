@@ -8,6 +8,7 @@ type User struct {
 	ID       uint   `json:"id" gorm:"primary_key"`
 	Username string `json:"username" gorm:"unique"`
 	Password string `json:"password"`
+	IsAdmin  bool   `json:"is_admin" gorm:"default:false"`
 }
 
 func HashPassword(password string) string {

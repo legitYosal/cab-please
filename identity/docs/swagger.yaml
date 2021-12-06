@@ -11,11 +11,14 @@ definitions:
     type: object
   controllers.UserSignupInput:
     properties:
+      is_admin:
+        type: boolean
       password:
         type: string
       username:
         type: string
     required:
+    - is_admin
     - password
     - username
     type: object

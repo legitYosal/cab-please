@@ -13,6 +13,7 @@ import (
 type UserSignupInput struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
+	IsAdmin  bool   `json:"is_admin"`
 }
 
 type UserLogin struct {
@@ -43,7 +44,7 @@ func ObtainJWT(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Wrong password!"})
 		return
 	}
-	token := auth.CreateJWT(user.ID, user.Username)
+	token := auth.CreateJWT(user.ID, user.Username, user.IsAdmin)
 	c.JSON(http.StatusOK, gin.H{"access": token})
 }
 
@@ -64,6 +65,7 @@ func SignupUser(c *gin.Context) {
 	user := models.User{
 		Username: input.Username,
 		Password: models.HashPassword(input.Password),
+		IsAdmin:  input.IsAdmin,
 	}
 	result := models.DB.Create(&user)
 	if result.Error == nil {
