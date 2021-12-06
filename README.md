@@ -16,7 +16,7 @@ $ docker-compose up -d
 
 Now to interact with the identity service and create a new user and obtain tokens you can use the swagger ui exposed at [this url](http://localhost:8080/swagger/index.html).  
 And you can interact with the passenger service to request a ride and see the calculated surge rates, using the swagger ui exposed at [this url](http://localhost:8081/swagger/index.html).  
-And finally as an admin user you can interact with the surge rating API, suing the swagger ui exposed at [this url](http://127.0.0.1:8000/api/schema/swagger/).  
+And finally as an admin user you can interact with the surge rating API, uing the swagger ui exposed at [this url](http://127.0.0.1:8000/api/schema/swagger/).  
 
 # Software architecture
 
@@ -39,18 +39,18 @@ It is clear that executing a query for each demand to calculate the surge rate, 
 2. More realtime aproach, we can cach the number of demands in redis on service startup, and each new demand will increase the cach value by +1, and after one hour, we will decrease the cach value by -1, hence the value is realtime and surge rating is calculated very precisely.   
 
 Aproach one doesn't requrie much resources, but aproach two uses a time queue to decrease the cached values, for example, if we have one milion demands in a time span of one hour(worst case scenario, not going to happen very soon), there will be almost one milion `decrease by one after one hour` messages in the queue, the worst possible thing can happen is that you will need about `one or two` extra GIGs of RAM.  
-A small note about the aproach two is that, because there maybe old messages on the queue, the worker that consumes the decrease messages must does the message only if it is created after the timestamp of the cached value, otherwise it will be ignored, to assure the inconsistency.  
-Also we must check if one unique user is trying to create many demands in a short time, if so, we will not change the cached demand count.  
+A small note about the aproach two is that, because there maybe old messages on the queue, the worker that consumes the decrease messages must does the message only if it is created after the timestamp of the cached value, otherwise it will be ignored, to assure the consistency.  And a similar condition is that the queue is not up running, so we have persisted numbers of demand counts in cache, so in later days we may reset the cache to zero in the early mornings...  
+Also we must check if one unique user is trying to create many demands in a short time, if so, we will not change the cached demand count, or we can rate limit a user or IP block him or her.  
 
 ![surge service basic](./docs/images/surge-basic.png)
 
-And we need a service to resolve the geographical location of the client into the real life district name or district id, so we are going to open street map, nominatim api to obtain these information.  
+And we need a service to resolve the geographical location of the client into the real life district name or district id, so we are going to use open street map data, and nominatim api to obtain these information.  
 Also we need a user management service that will handle authentication of our clients.  
 The primary system design:  
 
 ![overal design](./docs/images/design.png)
 
-I had came up with an idea to change and manage surge ratings in a persistant and realtime way, so admins can interact and change ratings using a rest api, and with each change the system will push the change to the redis cache and the surge service will calculate the new ratings.  
+I had came up with an idea to change and manage surge ratings in a persistant and realtime way, admins can interact and change ratings using rest api, and with each change the system will push the change to the redis cache and the surge service will calculate the new ratings.  
 The final system design schema:
 
 ![final design](./docs/images/final-design.png)
