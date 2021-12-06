@@ -8,7 +8,7 @@ import (
 
 func IsAuthenticated(c *gin.Context) (*middleware.TokenUser, bool) {
 	user, exist := c.Get("user")
-	if exist == true {
+	if exist {
 		user := user.(middleware.TokenUser)
 		return &user, true
 	} else {

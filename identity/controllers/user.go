@@ -85,7 +85,7 @@ func SignupUser(c *gin.Context) {
 // @Router   /api/users/profile [get]
 func GetProfile(c *gin.Context) {
 	user, isAuthorized := permission.IsAuthenticated(c)
-	if isAuthorized == false {
+	if !isAuthorized {
 		c.JSON(http.StatusForbidden, gin.H{"error": "You are not authorized to access!"})
 		return
 	}

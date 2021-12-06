@@ -19,7 +19,7 @@ func AuthorizationMiddleware(c *gin.Context) {
 	var user TokenUser
 	if len(c.Request.Header[TokenInHeaderName]) > 0 {
 		userID, userName, notValid := auth.DecodeJWT(c.Request.Header[TokenInHeaderName][0])
-		if notValid == false {
+		if !notValid {
 			user.ID = userID
 			user.Username = userName
 			c.Set("user", user)
