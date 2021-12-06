@@ -7,6 +7,7 @@ import (
 	"github.com/usefss/cab-please/passenger/mapgrpc"
 	"github.com/usefss/cab-please/passenger/rabbitmq"
 	"github.com/usefss/cab-please/passenger/redis"
+	"github.com/usefss/cab-please/passenger/surgegrpc"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,8 +26,8 @@ func adjustJourneyDemands(districtKey string) {
 	rabbitmq.PublishDecreaseDemand(prefixKey + districtKey)
 }
 
-func getSurgeRating(districtKey string) float64 {
-	return 0.5
+func getSurgeRating(districtKey string) float32 {
+	return surgegrpc.GetSurgeRating(districtKey)
 }
 
 // RequestJourney godoc

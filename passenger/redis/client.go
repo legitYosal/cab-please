@@ -2,6 +2,8 @@ package redis
 
 import (
 	"context"
+	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/go-redis/redis/v8"
@@ -28,4 +30,17 @@ func IncrementOrSetDemand(key string) {
 			panic(err)
 		}
 	}
+}
+
+func GetDemand(key string) uint64 {
+	value, err := rdb.Get(ctx, key).Result()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(value)
+	demands, errC := strconv.ParseUint(value, 10, 64)
+	if errC != nil {
+		panic(errC)
+	}
+	return demands
 }

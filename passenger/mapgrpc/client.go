@@ -15,7 +15,7 @@ var mapHost string = utils.GetEnv("MAP_SERVICE_HOST")
 
 func ResolveCoordinates(latitude float64, longitude float64) (string, string, string) {
 	var conn *grpc.ClientConn
-	conn, err := grpc.Dial(":"+mapPort, grpc.WithInsecure())
+	conn, err := grpc.Dial(mapHost+":"+mapPort, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %s", err)
 	}

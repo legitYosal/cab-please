@@ -1,0 +1,16 @@
+syntax = "proto3";
+package surge.surge.grpc;
+
+option go_package = "github.com/usefss/cab-please/surge";
+
+message DemandAreaKey {
+    string key = 1;
+}
+
+message SurgeRate {
+    float rate = 1;
+}
+
+service SurgeService {
+    rpc GetSurgeRate(DemandAreaKey) returns (SurgeRate) {}
+}
