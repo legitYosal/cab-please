@@ -15,7 +15,8 @@ def load_if_not_loaded():
             for threshold in data:
                 Threshold.objects.create(**threshold)
                 print('loaded:',threshold)
-        BaseThresholdAPI.update_on_redis()        
+            DefaultLoaded.objects.create()
+    BaseThresholdAPI.update_on_redis()        
 
 if __name__ == '__main__':
     load_if_not_loaded()

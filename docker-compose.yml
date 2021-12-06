@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  decreaser:
+    build: ./decreaser
+    depends_on:
+      - rabbitmq
+      - redis
+  identity:
+    build: ./identity
+    ports:
+      - 8080:8080
+    volumes:
+      - ./identity/db:/usr/src/app/db
+  map:
+    build: ./map
+  passenger:
+    build: ./passenger
+    ports:
+      - 8081:8081
+    depends_on:
+      - rabbitmq
+      - redis
+      - surge
+      - map
+  surge:
+    build: ./surge
+    depends_on:
+      - redis
+      - surgeapi
+  surgeapi:
+    build: ./surgeapi
+    ports:
+      - 8000:8000
+    volumes:
+      - ./surgeapi/db:/usr/src/app/db
+    depends_on:
+      - redis
+  redis:
+    image: redis
+  rabbitmq:
+    build: ./rabbitmq
