@@ -2,7 +2,6 @@ package redis
 
 import (
 	"context"
-	"fmt"
 	"strconv"
 	"time"
 
@@ -19,6 +18,10 @@ var rdb = redis.NewClient(&redis.Options{
 	DB:       0,
 })
 
+func GetRedisClient() *redis.Client {
+	return rdb
+}
+
 func IncrementOrSetDemand(key string) {
 	value, err := rdb.Incr(ctx, key).Result()
 	if err != nil {
@@ -34,10 +37,11 @@ func IncrementOrSetDemand(key string) {
 
 func GetDemand(key string) uint64 {
 	value, err := rdb.Get(ctx, key).Result()
-	if err != nil {
+	if err == redis.Nil {
+		return 0
+	} else if err != nil {
 		panic(err)
 	}
-	fmt.Println(value)
 	demands, errC := strconv.ParseUint(value, 10, 64)
 	if errC != nil {
 		panic(errC)
