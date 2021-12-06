@@ -29,10 +29,15 @@ Also we must check if one unique user is trying to create many demands in a shor
 
 ![surge service basic](./docs/images/surge-basic.png)
 
-And we need a service to resolve the geographical location of the client into the real life district name or district id, so we are going to open street map, overpass api to obtain these information.  
+And we need a service to resolve the geographical location of the client into the real life district name or district id, so we are going to open street map, nominatim api to obtain these information.  
 Also we need a user management service that will handle authentication of our clients.  
+The primary system design:  
 
 ![overal design](./docs/images/design.png)
+
+The final system design schema:
+
+![final design](./docs/images/final-design.png)
 
 ## Resources
 
