@@ -3,6 +3,21 @@
 This project tries to create a solution for high load demand surges in a taxi as a service provider platform like uber.  
 This is a proof of concept and is not intended to be used in production.
 
+# How to run and use the project
+
+I have dockerized the project and you can run it with the following commands(you must have installed git, docker and docker-compose before running these commands):
+
+```
+$ git clone git@github.com:usefss/cab-please.git
+$ cd cab-please
+$ docker-compose build
+$ docker-compose up -d
+```
+
+Now to interact with the identity service and create a new user and obtain tokens you can use the swagger ui exposed at [this url](http://localhost:8080/swagger/index.html).  
+And you can interact with the passenger service to request a ride and see the calculated surge rates, using the swagger ui exposed at [this url](http://localhost:8081/swagger/index.html).  
+And finally as an admin user you can interact with the surge rating API, suing the swagger ui exposed at [this url](http://127.0.0.1:8000/api/schema/swagger/).  
+
 # Software architecture
 
 The mind map and the concepts I have put together to create the finanl output.    
@@ -35,6 +50,7 @@ The primary system design:
 
 ![overal design](./docs/images/design.png)
 
+I had came up with an idea to change and manage surge ratings in a persistant and realtime way, so admins can interact and change ratings using a rest api, and with each change the system will push the change to the redis cache and the surge service will calculate the new ratings.  
 The final system design schema:
 
 ![final design](./docs/images/final-design.png)
