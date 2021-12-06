@@ -22,8 +22,8 @@ var prefixKey string = "surge-demands:"
 func adjustJourneyDemands(districtKey string) {
 	// Note I know I should prevent one user to send many demands but it actually \
 	// must be handled in ratelimit
-	redis.IncrementOrSetDemand(prefixKey + districtKey)
-	rabbitmq.PublishDecreaseDemand(prefixKey + districtKey)
+	redis.IncrementOrSetDemand(districtKey)
+	rabbitmq.PublishDecreaseDemand(districtKey)
 }
 
 func getSurgeRating(districtKey string) float32 {
@@ -52,7 +52,7 @@ func RequestJourney(c *gin.Context) {
 		return
 	}
 	district, city, country := mapgrpc.ResolveCoordinates(input.StartLatitude, input.StartLongitude)
-	districtKey := country + ":" + city + ":" + district
+	districtKey := prefixKey + country + ":" + city + ":" + district
 	go adjustJourneyDemands(districtKey)
 	surgeRating := getSurgeRating(districtKey)
 	c.JSON(http.StatusOK, gin.H{

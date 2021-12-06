@@ -1,0 +1,30 @@
+[
+    {
+        "request_threshold": 0,
+        "price_coefficient": 1
+    },
+    {
+        "request_threshold": 1000,
+        "price_coefficient": 1.05
+    },
+    {
+        "request_threshold": 3000,
+        "price_coefficient": 1.1
+    },
+    {
+        "request_threshold": 5000,
+        "price_coefficient": 1.2
+    },
+    {
+        "request_threshold": 10000,
+        "price_coefficient": 1.5
+    },
+    {
+        "request_threshold": 25000,
+        "price_coefficient": 2
+    },
+    {
+        "request_threshold": 50000,
+        "price_coefficient": 3
+    }
+]

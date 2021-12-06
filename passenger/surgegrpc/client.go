@@ -22,7 +22,7 @@ func GetSurgeRating(demandAreaKey string) float32 {
 	c := NewSurgeServiceClient(conn)
 	res, err := c.GetSurgeRate(context.Background(), &DemandAreaKey{Key: demandAreaKey})
 	if err != nil {
-		log.Fatalf("Error when calling SayHello: %s", err)
+		log.Fatalf("Error when calling GetSurgeRate: %s", err)
 	}
 	log.Printf("Response from server: %f", res.Rate)
 	return res.Rate
