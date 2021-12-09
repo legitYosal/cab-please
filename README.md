@@ -15,7 +15,7 @@ $ docker-compose up -d --scale decreaser=4
 ```
 
 Now to interact with the identity service and create a new user and obtain tokens you can use the swagger ui exposed at [this url](http://localhost:8080/swagger/index.html).  
-And you can interact with the passenger service to request a ride and see the calculated surge rates, using the swagger ui exposed at [this url](http://localhost:8081/swagger/index.html).  
+And you can interact with the passenger service to request a ride and see the calculated surge rates, using the swagger ui exposed at [this url](http://localhost:8081/swagger/index.html)(Please send real longitude and latitude, I forgot to put validation).  
 And finally as an admin user you can interact with the surge rating API, uing the swagger ui exposed at [this url](http://127.0.0.1:8000/api/schema/swagger/).  
 
 # Software architecture
