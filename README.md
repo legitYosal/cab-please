@@ -11,6 +11,7 @@ I have dockerized the project and you can run it with the following commands(you
 $ git clone git@github.com:usefss/cab-please.git
 $ cd cab-please
 $ docker-compose build
+# copy .env.example to .env in each service
 $ docker-compose up -d --scale decreaser=4
 ```
 
